@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Psychic Game</title>
+</head>
+<script>
+
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+var wins = 0;
+var losses = 0;
+var guessesLeft = 9;
+var guessesNow = [];
+
+var computerChoice = alphabet[Math.floor(Math.raondom() * alphabet.length)];
+
+document.onkeyup = function(event) {
+    var userGuess = event.key;
+    guessesNow.push(userGuess);
+
+        if (userGuess === computerChoice) {
+            wins++;
+            guessesLeft = 9;
+            guessesNow = [];
+            computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+        } 
+        else {
+            guessesLeft--;
+        }
+        if (guessesLeft === 0) {
+            losses++;
+            guessesLeft = 9;
+            guessesNow = [];
+            computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+        }
+
+  var html =
+                    "<h1> The Psychic Game </h1>" +
+                    "<div> Guess What Letter I'm thinking Of" +
+                    "<div> Wins: " + wins + "</div>" +
+                    "<div>Losses: " + losses +
+                    "<div>Guesses Left: " + guessesLeft +
+                    "<div>Your Guesses so far: " + guessesNow + "<div>";
+                document.querySelector(".container").innerHTML = html;
+}
+</script>
